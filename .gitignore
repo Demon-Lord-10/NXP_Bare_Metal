@@ -1,0 +1,13 @@
+#directories
+build/
+obj/
+
+
+#files
+*.o
+*.d
+*.elf
+*.bin
+*.hex
+*.map
+*.txt
