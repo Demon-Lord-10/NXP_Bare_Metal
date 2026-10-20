@@ -11,3 +11,4 @@ obj/
 *.hex
 *.map
 *.txt
+*.clangd
