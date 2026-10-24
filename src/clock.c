@@ -128,3 +128,35 @@ void Clock_Enable_GPIO(uint8_t gpio_num){
     /* Freeze clock configuration registers */
     SYSCON->CLKUNLOCK |= SYSCON_CLKUNLOCK_UNLOCK_MASK;
 }
+
+void MRCC_Enable(uint8_t group, uint32_t mask) {
+    /* 1. Unlock MRCC */
+    SYSCON->CLKUNLOCK &= ~SYSCON_CLKUNLOCK_UNLOCK_MASK;
+
+    /* 2. Release from reset & enable clock using atomic SET registers */
+    if (group == 0) {
+        MRCC0->MRCC_GLB_RST0_SET = mask;
+        MRCC0->MRCC_GLB_CC0_SET  = mask;
+    } else {
+        MRCC0->MRCC_GLB_RST1_SET = mask;
+        MRCC0->MRCC_GLB_CC1_SET  = mask;
+    }
+
+    /* 3. Re-lock MRCC */
+    SYSCON->CLKUNLOCK |= SYSCON_CLKUNLOCK_UNLOCK_MASK;
+}
+
+void MRCC_Disable(uint8_t group, uint32_t mask) {
+    SYSCON->CLKUNLOCK &= ~SYSCON_CLKUNLOCK_UNLOCK_MASK;
+
+    /* Gate clock & assert reset using atomic CLR registers */
+    if (group == 0) {
+        MRCC0->MRCC_GLB_CC0_CLR  = mask;
+        MRCC0->MRCC_GLB_RST0_CLR = mask;
+    } else {
+        MRCC0->MRCC_GLB_CC1_CLR  = mask;
+        MRCC0->MRCC_GLB_RST1_CLR = mask;
+    }
+
+    SYSCON->CLKUNLOCK |= SYSCON_CLKUNLOCK_UNLOCK_MASK;
+}

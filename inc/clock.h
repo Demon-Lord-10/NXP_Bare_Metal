@@ -86,27 +86,93 @@ typedef struct {
 #define MRCC0_BASE                       (0x40091000u)
 #define MRCC0                            ((MRCC_Type *)MRCC0_BASE)
 
-/* MRCC Peripheral Reset Masks */
-#define MRCC_MRCC_GLB_RST0_PORT0_MASK    (0x20000000U) /* Bit 29 */
-#define MRCC_MRCC_GLB_RST0_PORT1_MASK    (0x40000000U) /* Bit 30 */
-#define MRCC_MRCC_GLB_RST0_PORT2_MASK    (0x80000000U) /* Bit 31 */
-#define MRCC_MRCC_GLB_RST1_PORT3_MASK    (0x1U)        /* Bit 0 */
+/* ============================================================================
+ * MRCC Peripheral Reset Masks (MRCC_GLB_RST0 & MRCC_GLB_RST1)
+ * Write 1 to release peripheral from reset (e.g. MRCC0->MRCC_GLB_RST0_SET = MASK)
+ * ============================================================================ */
 
-#define MRCC_MRCC_GLB_RST1_GPIO0_MASK    (0x20U)       /* Bit 5 */
-#define MRCC_MRCC_GLB_RST1_GPIO1_MASK    (0x40U)       /* Bit 6 */
-#define MRCC_MRCC_GLB_RST1_GPIO2_MASK    (0x80U)       /* Bit 7 */
-#define MRCC_MRCC_GLB_RST1_GPIO3_MASK    (0x100U)      /* Bit 8 */
+/* --- MRCC_GLB_RST0 (Offset 0x00) --- */
+#define MRCC_MRCC_GLB_RST0_INPUTMUX0_MASK (0x1U)        /* Bit 0 */
+#define MRCC_MRCC_GLB_RST0_I3C0_MASK      (0x2U)        /* Bit 1 */
+#define MRCC_MRCC_GLB_RST0_CTIMER0_MASK   (0x4U)        /* Bit 2 */
+#define MRCC_MRCC_GLB_RST0_CTIMER1_MASK   (0x8U)        /* Bit 3 */
+#define MRCC_MRCC_GLB_RST0_CTIMER2_MASK   (0x10U)       /* Bit 4 */
+#define MRCC_MRCC_GLB_RST0_FREQME_MASK    (0x20U)       /* Bit 5 */
+#define MRCC_MRCC_GLB_RST0_UTICK0_MASK    (0x40U)       /* Bit 6 */
+#define MRCC_MRCC_GLB_RST0_DMA_MASK       (0x100U)      /* Bit 8 */
+#define MRCC_MRCC_GLB_RST0_AOI0_MASK      (0x200U)      /* Bit 9 */
+#define MRCC_MRCC_GLB_RST0_CRC_MASK       (0x400U)      /* Bit 10 */
+#define MRCC_MRCC_GLB_RST0_EIM_MASK       (0x800U)      /* Bit 11 */
+#define MRCC_MRCC_GLB_RST0_ERM_MASK       (0x1000U)     /* Bit 12 */
+#define MRCC_MRCC_GLB_RST0_LPI2C0_MASK    (0x10000U)    /* Bit 16 */
+#define MRCC_MRCC_GLB_RST0_LPSPI0_MASK    (0x20000U)    /* Bit 17 */
+#define MRCC_MRCC_GLB_RST0_LPSPI1_MASK    (0x40000U)    /* Bit 18 */
+#define MRCC_MRCC_GLB_RST0_LPUART0_MASK   (0x80000U)    /* Bit 19 */
+#define MRCC_MRCC_GLB_RST0_LPUART1_MASK   (0x100000U)   /* Bit 20 */
+#define MRCC_MRCC_GLB_RST0_LPUART2_MASK   (0x200000U)   /* Bit 21 */
+#define MRCC_MRCC_GLB_RST0_USB0_MASK      (0x400000U)   /* Bit 22 */
+#define MRCC_MRCC_GLB_RST0_QDC0_MASK      (0x800000U)   /* Bit 23 */
+#define MRCC_MRCC_GLB_RST0_FLEXPWM0_MASK  (0x1000000U)  /* Bit 24 */
+#define MRCC_MRCC_GLB_RST0_OSTIMER0_MASK  (0x2000000U)  /* Bit 25 */
+#define MRCC_MRCC_GLB_RST0_ADC0_MASK      (0x4000000U)  /* Bit 26 */
+#define MRCC_MRCC_GLB_RST0_CMP1_MASK      (0x10000000U) /* Bit 28 */
+#define MRCC_MRCC_GLB_RST0_PORT0_MASK     (0x20000000U) /* Bit 29 */
+#define MRCC_MRCC_GLB_RST0_PORT1_MASK     (0x40000000U) /* Bit 30 */
+#define MRCC_MRCC_GLB_RST0_PORT2_MASK     (0x80000000U) /* Bit 31 */
 
-/* MRCC Peripheral Clock Gate Masks */
-#define MRCC_MRCC_GLB_CC0_PORT0_MASK     (0x20000000U) /* Bit 29 */
-#define MRCC_MRCC_GLB_CC0_PORT1_MASK     (0x40000000U) /* Bit 30 */
-#define MRCC_MRCC_GLB_CC0_PORT2_MASK     (0x80000000U) /* Bit 31 */
-#define MRCC_MRCC_GLB_CC1_PORT3_MASK     (0x1U)        /* Bit 0 */
+/* --- MRCC_GLB_RST1 (Offset 0x10) --- */
+#define MRCC_MRCC_GLB_RST1_PORT3_MASK     (0x1U)        /* Bit 0 */
+#define MRCC_MRCC_GLB_RST1_GPIO0_MASK     (0x20U)       /* Bit 5 */
+#define MRCC_MRCC_GLB_RST1_GPIO1_MASK     (0x40U)       /* Bit 6 */
+#define MRCC_MRCC_GLB_RST1_GPIO2_MASK     (0x80U)       /* Bit 7 */
+#define MRCC_MRCC_GLB_RST1_GPIO3_MASK     (0x100U)      /* Bit 8 */
 
-#define MRCC_MRCC_GLB_CC1_GPIO0_MASK     (0x20U)       /* Bit 5 */
-#define MRCC_MRCC_GLB_CC1_GPIO1_MASK     (0x40U)       /* Bit 6 */
-#define MRCC_MRCC_GLB_CC1_GPIO2_MASK     (0x80U)       /* Bit 7 */
-#define MRCC_MRCC_GLB_CC1_GPIO3_MASK     (0x100U)      /* Bit 8 */
+/* ============================================================================
+ * MRCC Peripheral Clock Gate Masks (MRCC_GLB_CC0 & MRCC_GLB_CC1)
+ * Write 1 to enable peripheral clock (e.g. MRCC0->MRCC_GLB_CC0_SET = MASK)
+ * ============================================================================ */
+
+/* --- MRCC_GLB_CC0 (Offset 0x40) --- */
+#define MRCC_MRCC_GLB_CC0_INPUTMUX0_MASK  (0x1U)        /* Bit 0 */
+#define MRCC_MRCC_GLB_CC0_I3C0_MASK       (0x2U)        /* Bit 1 */
+#define MRCC_MRCC_GLB_CC0_CTIMER0_MASK    (0x4U)        /* Bit 2 */
+#define MRCC_MRCC_GLB_CC0_CTIMER1_MASK    (0x8U)        /* Bit 3 */
+#define MRCC_MRCC_GLB_CC0_CTIMER2_MASK    (0x10U)       /* Bit 4 */
+#define MRCC_MRCC_GLB_CC0_FREQME_MASK     (0x20U)       /* Bit 5 */
+#define MRCC_MRCC_GLB_CC0_UTICK0_MASK     (0x40U)       /* Bit 6 */
+#define MRCC_MRCC_GLB_CC0_WWDT0_MASK      (0x80U)       /* Bit 7 */
+#define MRCC_MRCC_GLB_CC0_DMA_MASK        (0x100U)      /* Bit 8 */
+#define MRCC_MRCC_GLB_CC0_AOI0_MASK       (0x200U)      /* Bit 9 */
+#define MRCC_MRCC_GLB_CC0_CRC_MASK        (0x400U)      /* Bit 10 */
+#define MRCC_MRCC_GLB_CC0_EIM_MASK        (0x800U)      /* Bit 11 */
+#define MRCC_MRCC_GLB_CC0_ERM_MASK        (0x1000U)     /* Bit 12 */
+#define MRCC_MRCC_GLB_CC0_LPI2C0_MASK     (0x10000U)    /* Bit 16 */
+#define MRCC_MRCC_GLB_CC0_LPSPI0_MASK     (0x20000U)    /* Bit 17 */
+#define MRCC_MRCC_GLB_CC0_LPSPI1_MASK     (0x40000U)    /* Bit 18 */
+#define MRCC_MRCC_GLB_CC0_LPUART0_MASK    (0x80000U)    /* Bit 19 */
+#define MRCC_MRCC_GLB_CC0_LPUART1_MASK    (0x100000U)   /* Bit 20 */
+#define MRCC_MRCC_GLB_CC0_LPUART2_MASK    (0x200000U)   /* Bit 21 */
+#define MRCC_MRCC_GLB_CC0_USB0_MASK       (0x400000U)   /* Bit 22 */
+#define MRCC_MRCC_GLB_CC0_QDC0_MASK       (0x800000U)   /* Bit 23 */
+#define MRCC_MRCC_GLB_CC0_FLEXPWM0_MASK   (0x1000000U)  /* Bit 24 */
+#define MRCC_MRCC_GLB_CC0_OSTIMER0_MASK   (0x2000000U)  /* Bit 25 */
+#define MRCC_MRCC_GLB_CC0_ADC0_MASK       (0x4000000U)  /* Bit 26 */
+#define MRCC_MRCC_GLB_CC0_CMP0_MASK       (0x8000000U)  /* Bit 27 */
+#define MRCC_MRCC_GLB_CC0_CMP1_MASK       (0x10000000U) /* Bit 28 */
+#define MRCC_MRCC_GLB_CC0_PORT0_MASK      (0x20000000U) /* Bit 29 */
+#define MRCC_MRCC_GLB_CC0_PORT1_MASK      (0x40000000U) /* Bit 30 */
+#define MRCC_MRCC_GLB_CC0_PORT2_MASK      (0x80000000U) /* Bit 31 */
+
+/* --- MRCC_GLB_CC1 (Offset 0x50) --- */
+#define MRCC_MRCC_GLB_CC1_PORT3_MASK      (0x1U)        /* Bit 0 */
+#define MRCC_MRCC_GLB_CC1_MTR_MASK        (0x4U)        /* Bit 2 */
+#define MRCC_MRCC_GLB_CC1_TCU_MASK        (0x8U)        /* Bit 3 */
+#define MRCC_MRCC_GLB_CC1_EZRAMC_RAMA_MASK (0x10U)      /* Bit 4 */
+#define MRCC_MRCC_GLB_CC1_GPIO0_MASK      (0x20U)       /* Bit 5 */
+#define MRCC_MRCC_GLB_CC1_GPIO1_MASK      (0x40U)       /* Bit 6 */
+#define MRCC_MRCC_GLB_CC1_GPIO2_MASK      (0x80U)       /* Bit 7 */
+#define MRCC_MRCC_GLB_CC1_GPIO3_MASK      (0x100U)      /* Bit 8 */
+#define MRCC_MRCC_GLB_CC1_ROMCP_MASK      (0x200U)      /* Bit 9 */
 
 /* ============================================================================
  * SYSCON (System Controller) Register Definition
@@ -141,6 +207,8 @@ typedef struct {
 /* ============================================================================
  * Clock Driver Function Prototypes
  * ============================================================================ */
+void MRCC_Enable(uint8_t group, uint32_t mask);
+void MRCC_Disable(uint8_t group, uint32_t mask);
 void Clock_Init_48MHZ(void);
 void Clock_Init_96MHZ(void);
 void Clock_Enable_Port(uint8_t port_num);
