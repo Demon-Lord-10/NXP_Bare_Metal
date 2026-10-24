@@ -1,6 +1,14 @@
 #include "gpio.h"
+#include "clock.h"
 
 void GPIO_PinInit(GPIO_Type *base, PORT_Type *port, uint32_t pin, uint8_t dir) {
+
+    uint8_t n = (uint8_t)((uintptr_t)port >> 12) & 3u;   // gives number for each port
+    Clock_Enable_Port(n);
+
+    n = (uint8_t)(((uintptr_t)base - GPIO0_BASE) >> 12);
+    Clock_Enable_GPIO(n);
+
     /* 1. Set pin mux to Alternative 0 (GPIO) */
     port->PCR[pin] = PORT_PCR_MUX(0);
 

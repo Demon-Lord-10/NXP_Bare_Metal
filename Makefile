@@ -12,15 +12,18 @@ LDSCRIPT := linker.ld
 CC      := arm-none-eabi-gcc
 OBJCOPY := arm-none-eabi-objcopy
 SIZE    := arm-none-eabi-size
+OBJDUMP := arm-none-eabi-objdump
 
 ELF := $(BUILD_DIR)/$(TARGET).elf
 BIN := $(BUILD_DIR)/$(TARGET).bin
 MAP := $(BUILD_DIR)/$(TARGET).map
+LST := $(BUILD_DIR)/$(TARGET).lst
 
 # Flags
 CFLAGS := -mcpu=$(CPU) -mthumb -O0 -g3 \
           -Wall -Wextra -mlittle-endian \
-          -nostdlib $(INC) -nostartfiles
+          -nostdlib $(INC) -nostartfiles \
+		  -Wshadow
 
 LDFLAGS  := -mcpu=$(CPU) -mthumb \
             -T $(LDSCRIPT) \
@@ -30,7 +33,7 @@ LDFLAGS  := -mcpu=$(CPU) -mthumb \
             -Wl,--print-memory-usage
 
 # Default rule: asks for both .elf and .bin
-all: $(ELF) $(BIN)
+all: $(ELF) $(BIN) $(LST)
 
 # create dir if it doesnt exist
 $(BUILD_DIR) $(OBJ_DIR):
@@ -41,6 +44,10 @@ $(OBJ): | $(OBJ_DIR)
 # .elf -> .bin
 $(BIN): $(ELF)
 	$(OBJCOPY) -O binary $< $@
+
+# .elf -> .lst (Disassembly listing with interleaved C source)
+$(LST): $(ELF)
+	$(OBJDUMP) -h -S -d $< >$@
 
 # .o files -> .elf
 $(ELF): $(OBJ) | $(BUILD_DIR)
@@ -56,7 +63,7 @@ $(OBJ_DIR)/%.o: src/%.s
 
 # Delete generated files so you can rebuild from scratch
 clean:
-	rm -rf $(BUILD_DIR) $(OBJ_DIR)
+	rm -rf $(BUILD_DIR)/* $(OBJ_DIR)/*
 
 # Flash on to the NXP board
 flash: $(ELF)

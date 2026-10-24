@@ -7,7 +7,7 @@
  * PORT (Port Control) Register Definition
  * Reference Manual: Chapter 11 (Base: 0x400BC000 - 0x400BF000)
  * ============================================================================ */
-typedef struct {
+    typedef struct {
     volatile const uint32_t VERID;       /**< 0x00: Version ID */
     uint8_t RESERVED_0[12];              /**< 0x04 - 0x0F */
     volatile uint32_t GPCLR;             /**< 0x10: Global Pin Control Low */
