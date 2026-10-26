@@ -81,6 +81,13 @@ typedef struct {
     volatile uint32_t MRCC_GLB_CC1;      /**< 0x50: Clock Control 1 */
     volatile uint32_t MRCC_GLB_CC1_SET;  /**< 0x54: Clock Control Set 1 (Write 1 to set) */
     volatile uint32_t MRCC_GLB_CC1_CLR;  /**< 0x58: Clock Control Clear 1 */
+    uint8_t RESERVED_3[132];             /**< 0x5C - 0xDF */
+    volatile uint32_t MRCC_LPUART0_CLKSEL; /**< 0xE0: LPUART0 Clock Selection */
+    volatile uint32_t MRCC_LPUART0_CLKDIV; /**< 0xE4: LPUART0 Clock Divider */
+    volatile uint32_t MRCC_LPUART1_CLKSEL; /**< 0xE8: LPUART1 Clock Selection */
+    volatile uint32_t MRCC_LPUART1_CLKDIV; /**< 0xEC: LPUART1 Clock Divider */
+    volatile uint32_t MRCC_LPUART2_CLKSEL; /**< 0xF0: LPUART2 Clock Selection */
+    volatile uint32_t MRCC_LPUART2_CLKDIV; /**< 0xF4: LPUART2 Clock Divider */
 } MRCC_Type;
 
 #define MRCC0_BASE                       (0x40091000u)
@@ -215,4 +222,3 @@ void Clock_Enable_Port(uint8_t port_num);
 void Clock_Enable_GPIO(uint8_t gpio_num);
 
 #endif /* CLOCK_H */
-

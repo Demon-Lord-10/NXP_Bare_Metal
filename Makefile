@@ -69,4 +69,7 @@ clean:
 flash: $(ELF)
 	LinkServer flash MCXA153 load $<
 
+serial:
+	gnome-terminal --tab -- bash -c "minicom -D /dev/ttyACM0; exec bash" 
+
 .PHONY: all clean flash
