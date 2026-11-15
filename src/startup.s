@@ -27,7 +27,16 @@ vector_table:
     .word 0x00000000                    /* 0x34: ImageExecutionAddress*/
     .word default_handler               /* 0x38: PendSV */
     .word default_handler               /* 0x3C: SysTick */
-    .rept 448                           /*IRQ0 to IRQ 479*/
+
+    .rept 31                            /*IRQ0 to IRQ 30*/
+    .long default_handler
+    .endr
+
+    .long LPUART0_IRQHandler
+    .long LPUART1_IRQHandler
+    .long LPUART2_IRQHandler
+
+    .rept 414
     .long default_handler
     .endr
 
@@ -67,3 +76,12 @@ bss_done:
 .type default_handler, %function
 default_handler:
     b .
+
+.weak LPUART0_IRQHandler
+.thumb_set LPUART0_IRQHandler, default_handler
+
+.weak LPUART1_IRQHandler
+.thumb_set LPUART1_IRQHandler, default_handler
+
+.weak LPUART2_IRQHandler
+.thumb_set LPUART2_IRQHandler, default_handler

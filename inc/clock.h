@@ -65,30 +65,75 @@ typedef struct {
  * MRCC (Module Reset and Clock Control) Register Definition
  * Reference Manual: Chapter 14 (Base Address: 0x40091000)
  * ============================================================================ */
+
 typedef struct {
-    volatile uint32_t MRCC_GLB_RST0;     /**< 0x00: Reset Control 0 */
-    volatile uint32_t MRCC_GLB_RST0_SET; /**< 0x04: Reset Control Set 0 (Write 1 to set) */
-    volatile uint32_t MRCC_GLB_RST0_CLR; /**< 0x08: Reset Control Clear 0 */
-    uint8_t RESERVED_0[4];               /**< 0x0C */
-    volatile uint32_t MRCC_GLB_RST1;     /**< 0x10: Reset Control 1 */
-    volatile uint32_t MRCC_GLB_RST1_SET; /**< 0x14: Reset Control Set 1 (Write 1 to set) */
-    volatile uint32_t MRCC_GLB_RST1_CLR; /**< 0x18: Reset Control Clear 1 */
-    uint8_t RESERVED_1[36];              /**< 0x1C - 0x3F */
-    volatile uint32_t MRCC_GLB_CC0;      /**< 0x40: Clock Control 0 */
-    volatile uint32_t MRCC_GLB_CC0_SET;  /**< 0x44: Clock Control Set 0 (Write 1 to set) */
-    volatile uint32_t MRCC_GLB_CC0_CLR;  /**< 0x48: Clock Control Clear 0 */
-    uint8_t RESERVED_2[4];               /**< 0x4C */
-    volatile uint32_t MRCC_GLB_CC1;      /**< 0x50: Clock Control 1 */
-    volatile uint32_t MRCC_GLB_CC1_SET;  /**< 0x54: Clock Control Set 1 (Write 1 to set) */
-    volatile uint32_t MRCC_GLB_CC1_CLR;  /**< 0x58: Clock Control Clear 1 */
-    uint8_t RESERVED_3[132];             /**< 0x5C - 0xDF */
-    volatile uint32_t MRCC_LPUART0_CLKSEL; /**< 0xE0: LPUART0 Clock Selection */
-    volatile uint32_t MRCC_LPUART0_CLKDIV; /**< 0xE4: LPUART0 Clock Divider */
-    volatile uint32_t MRCC_LPUART1_CLKSEL; /**< 0xE8: LPUART1 Clock Selection */
-    volatile uint32_t MRCC_LPUART1_CLKDIV; /**< 0xEC: LPUART1 Clock Divider */
-    volatile uint32_t MRCC_LPUART2_CLKSEL; /**< 0xF0: LPUART2 Clock Selection */
-    volatile uint32_t MRCC_LPUART2_CLKDIV; /**< 0xF4: LPUART2 Clock Divider */
+    volatile uint32_t MRCC_GLB_RST0;          /**< 0x00: Reset Control 0 */
+    volatile uint32_t MRCC_GLB_RST0_SET;      /**< 0x04: Reset Control Set 0 (Write 1 to set) */
+    volatile uint32_t MRCC_GLB_RST0_CLR;      /**< 0x08: Reset Control Clear 0 */
+    uint8_t RESERVED_0[4];                    /**< 0x0C */
+    volatile uint32_t MRCC_GLB_RST1;          /**< 0x10: Reset Control 1 */
+    volatile uint32_t MRCC_GLB_RST1_SET;      /**< 0x14: Reset Control Set 1 (Write 1 to set) */
+    volatile uint32_t MRCC_GLB_RST1_CLR;      /**< 0x18: Reset Control Clear 1 */
+    uint8_t RESERVED_1[36];                   /**< 0x1C - 0x3F */
+    volatile uint32_t MRCC_GLB_CC0;           /**< 0x40: Clock Control 0 */
+    volatile uint32_t MRCC_GLB_CC0_SET;       /**< 0x44: Clock Control Set 0 (Write 1 to set) */
+    volatile uint32_t MRCC_GLB_CC0_CLR;       /**< 0x48: Clock Control Clear 0 */
+    uint8_t RESERVED_2[4];                    /**< 0x4C */
+    volatile uint32_t MRCC_GLB_CC1;           /**< 0x50: Clock Control 1 */
+    volatile uint32_t MRCC_GLB_CC1_SET;       /**< 0x54: Clock Control Set 1 (Write 1 to set) */
+    volatile uint32_t MRCC_GLB_CC1_CLR;       /**< 0x58: Clock Control Clear 1 */
+    uint8_t RESERVED_3[36];                   /**< 0x5C - 0x7F */
+    volatile uint32_t MRCC_GLB_ACC0;          /**< 0x80: Automatic Clock Gating 0 */
+    volatile uint32_t MRCC_GLB_ACC1;          /**< 0x84: Automatic Clock Gating 1 */
+    uint8_t RESERVED_4[24];                   /**< 0x88 - 0x9F */
+    volatile uint32_t MRCC_I3C0_FCLK_CLKSEL;  /**< 0xA0: I3C0_FCLK Clock Selection */
+    volatile uint32_t MRCC_I3C0_FCLK_CLKDIV;  /**< 0xA4: I3C0_FCLK Clock Divider */
+    volatile uint32_t MRCC_CTIMER0_CLKSEL;    /**< 0xA8: CTIMER0 Clock Selection */
+    volatile uint32_t MRCC_CTIMER0_CLKDIV;    /**< 0xAC: CTIMER0 Clock Divider */
+    volatile uint32_t MRCC_CTIMER1_CLKSEL;    /**< 0xB0: CTIMER1 Clock Selection */
+    volatile uint32_t MRCC_CTIMER1_CLKDIV;    /**< 0xB4: CTIMER1 Clock Divider */
+    volatile uint32_t MRCC_CTIMER2_CLKSEL;    /**< 0xB8: CTIMER2 Clock Selection */
+    volatile uint32_t MRCC_CTIMER2_CLKDIV;    /**< 0xBC: CTIMER2 Clock Divider */
+    uint8_t RESERVED_5[4];                    /**< 0xC0 */
+    volatile uint32_t MRCC_WWDT0_CLKDIV;      /**< 0xC4: WWDT0 Clock Divider */
+    volatile uint32_t MRCC_LPI2C0_CLKSEL;     /**< 0xC8: LPI2C0 Clock Selection */
+    volatile uint32_t MRCC_LPI2C0_CLKDIV;     /**< 0xCC: LPI2C0 Clock Divider */
+    volatile uint32_t MRCC_LPSPI0_CLKSEL;     /**< 0xD0: LPSPI0 Clock Selection */
+    volatile uint32_t MRCC_LPSPI0_CLKDIV;     /**< 0xD4: LPSPI0 Clock Divider */
+    volatile uint32_t MRCC_LPSPI1_CLKSEL;     /**< 0xD8: LPSPI1 Clock Selection */
+    volatile uint32_t MRCC_LPSPI1_CLKDIV;     /**< 0xDC: LPSPI1 Clock Divider */
+    volatile uint32_t MRCC_LPUART0_CLKSEL;    /**< 0xE0: LPUART0 Clock Selection */
+    volatile uint32_t MRCC_LPUART0_CLKDIV;    /**< 0xE4: LPUART0 Clock Divider */
+    volatile uint32_t MRCC_LPUART1_CLKSEL;    /**< 0xE8: LPUART1 Clock Selection */
+    volatile uint32_t MRCC_LPUART1_CLKDIV;    /**< 0xEC: LPUART1 Clock Divider */
+    volatile uint32_t MRCC_LPUART2_CLKSEL;    /**< 0xF0: LPUART2 Clock Selection */
+    volatile uint32_t MRCC_LPUART2_CLKDIV;    /**< 0xF4: LPUART2 Clock Divider */
+    volatile uint32_t MRCC_USB0_CLKSEL;       /**< 0xF8: USB0 Clock Selection */
+    uint8_t RESERVED_6[4];                    /**< 0xFC */
+    volatile uint32_t MRCC_LPTMR0_CLKSEL;     /**< 0x100: LPTMR0 Clock Selection */
+    volatile uint32_t MRCC_LPTMR0_CLKDIV;     /**< 0x104: LPTMR0 Clock Divider */
+    volatile uint32_t MRCC_OSTIMER0_CLKSEL;   /**< 0x108: OSTIMER0 Clock Selection */
+    uint8_t RESERVED_7[4];                    /**< 0x10C */
+    volatile uint32_t MRCC_ADC0_CLKSEL;       /**< 0x110: ADC0 Clock Selection */
+    volatile uint32_t MRCC_ADC0_CLKDIV;       /**< 0x114: ADC0 Clock Divider */
+    uint8_t RESERVED_8[4];                    /**< 0x118 */
+    volatile uint32_t MRCC_CMP0_FUNC_CLKDIV;  /**< 0x11C: CMP0_FUNC Clock Divider */
+    volatile uint32_t MRCC_CMP0_RR_CLKSEL;    /**< 0x120: CMP0_RR Clock Selection */
+    volatile uint32_t MRCC_CMP0_RR_CLKDIV;    /**< 0x124: CMP0_RR Clock Divider */
+    uint8_t RESERVED_9[4];                    /**< 0x128 */
+    volatile uint32_t MRCC_CMP1_FUNC_CLKDIV;  /**< 0x12C: CMP1_FUNC Clock Divider */
+    volatile uint32_t MRCC_CMP1_RR_CLKSEL;    /**< 0x130: CMP1_RR Clock Selection */
+    volatile uint32_t MRCC_CMP1_RR_CLKDIV;    /**< 0x134: CMP1_RR Clock Divider */
+    volatile uint32_t MRCC_DBG_TRACE_CLKSEL;  /**< 0x138: DBG_TRACE Clock Selection */
+    volatile uint32_t MRCC_DBG_TRACE_CLKDIV;  /**< 0x13C: DBG_TRACE Clock Divider */
+    volatile uint32_t MRCC_CLKOUT_CLKSEL;     /**< 0x140: CLKOUT Clock Selection */
+    volatile uint32_t MRCC_CLKOUT_CLKDIV;     /**< 0x144: CLKOUT Clock Divider */
+    volatile uint32_t MRCC_SYSTICK_CLKSEL;    /**< 0x148: SYSTICK Clock Selection */
+    volatile uint32_t MRCC_SYSTICK_CLKDIV;    /**< 0x14C: SYSTICK Clock Divider */
+    uint8_t RESERVED_10[4];                   /**< 0x150 */
+    volatile uint32_t MRCC_FRO_HF_DIV_CLKDIV; /**< 0x154: FRO_HF_DIV Clock Divider */
 } MRCC_Type;
+
 
 #define MRCC0_BASE                       (0x40091000u)
 #define MRCC0                            ((MRCC_Type *)MRCC0_BASE)

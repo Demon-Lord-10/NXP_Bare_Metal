@@ -23,7 +23,8 @@ LST := $(BUILD_DIR)/$(TARGET).lst
 CFLAGS := -mcpu=$(CPU) -mthumb -O0 -g3 \
           -Wall -Wextra -mlittle-endian \
           -nostdlib $(INC) -nostartfiles \
-		  -Wshadow
+		  -Wshadow -ffunction-sections \
+		  -fdata-sections
 
 LDFLAGS  := -mcpu=$(CPU) -mthumb \
             -T $(LDSCRIPT) \

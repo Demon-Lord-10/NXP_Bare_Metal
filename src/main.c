@@ -1,20 +1,22 @@
+#include "i2c.h"
+#include "lcd.h"
 #include "clock.h"
 #include "utick.h"
-#include "uart.h"
 
-void Init(){
+void Init(void) {
     Clock_Init_48MHZ();
-    UART_Init(LPUART0);
     Utick_Init();
+    I2C_Init(LPI2C0);
+    lcd_init();
+    __asm volatile ("cpsie i");   // Enable interrupts globally in ARM core
 }
 
 int main(void) {
 
     Init();
-    int d = 0xFFFFFFFF;
+    lcd_print("Hello World!!");
+
     while(1){
-        UART_Printf(LPUART0,"Hello %d",d);
-        delay_us(1000000u);
     }
 
     return 0;

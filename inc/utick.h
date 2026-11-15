@@ -81,5 +81,6 @@ typedef struct {
 
 void Utick_Init();
 void delay_us(uint32_t us);
+void delay_ms(uint32_t ms);
 
 #endif /* UTICK_H */

@@ -20,5 +20,8 @@ void delay_us(uint32_t us) {
     while (UTICK0->STAT & UTICK_STAT_ACTIVE_MASK);
 }
 
-
-
+void delay_ms(uint32_t ms){
+    for(uint32_t i = 0; i < ms ; ++i){
+        delay_us(1000u);
+    }
+}

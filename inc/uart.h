@@ -156,5 +156,7 @@ char UART_RecvChar(LPUART_Type *uart);
 void UART_SetBaudRate(LPUART_Type *uart, uint32_t baudrate, uint32_t src_clock_hz);
 void UART_Printf(LPUART_Type *uart, const char *buff,...);
 uint32_t itoa(char* buff,int32_t d);
+void UART_EnableRxInterrupt(LPUART_Type *uart);
+void LPUART0_IRQHandler(void);
 
 #endif /* UART_H */

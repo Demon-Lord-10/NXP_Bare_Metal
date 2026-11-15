@@ -1,6 +1,7 @@
 #include "uart.h"
 #include "clock.h"
 #include "gpio.h"
+#include "nvic.h"
 #include <stdint.h>
 
 
@@ -79,6 +80,18 @@ void UART_Init(LPUART_Type *uart){
         PORT3->PCR[15u] = PORT_PCR_MUX(2u);                      //TX
     }
 
+    /* 3. Enable Hardware FIFO and Flush */
+    uart->CTRL &= ~(LPUART_CTRL_TE_MASK | LPUART_CTRL_RE_MASK);
+
+    uart->FIFO |= (LPUART_FIFO_TXFE_MASK | LPUART_FIFO_RXFE_MASK);
+    uart->FIFO |= (LPUART_FIFO_TXFLUSH_MASK | LPUART_FIFO_RXFLUSH_MASK);
+
+    /* 4. Set Watermark:
+     * RXWATER = 0 means interrupt triggers when count > 0 (as soon as >= 1 byte arrives)
+     * TXWATER = 0 means TDRE triggers when transmit FIFO is completely empty
+     */
+    uart->WATER = 0;
+
     UART_SetBaudRate(uart,115200u,12000000u);
 
 }
@@ -147,7 +160,7 @@ void UART_Printf(LPUART_Type *uart, const char *buff, ...){
                 break;
 
             case 'c':
-                c = va_arg(arg,char);
+                c = (char)va_arg(arg,int);
                 UART_SendChar(uart, c);
                 break;
 
@@ -210,5 +223,30 @@ uint32_t itoa(char* buff,int32_t d){
     }
 
     return x;
+}
+
+void UART_EnableRxInterrupt(LPUART_Type *uart) {
+    /* 1. Tell LPUART to trigger an interrupt when Receive Data Register is Full (RDRF) */
+    uart->CTRL |= LPUART_CTRL_RIE_MASK;
+    /* 2. Tell the ARM Core NVIC to accept interrupts for this UART */
+    if (uart == LPUART0) {
+        NVIC_EnableIRQ(LPUART0_IRQn); // IRQ 31
+    } else if (uart == LPUART1) {
+        NVIC_EnableIRQ(LPUART1_IRQn); // IRQ 32
+    } else if (uart == LPUART2) {
+        NVIC_EnableIRQ(LPUART2_IRQn); // IRQ 33
+    }
+}
+
+void LPUART0_IRQHandler(void) {
+    /* 1. Clear any overrun/framing error flags so RX never freezes */
+    if (LPUART0->STAT & (LPUART_STAT_OR_MASK | LPUART_STAT_FE_MASK)) {
+        LPUART0->STAT |= (LPUART_STAT_OR_MASK | LPUART_STAT_FE_MASK);
+    }
+    /* 2. Check if a byte arrived (RDRF = 1) */
+    while (LPUART0->STAT & LPUART_STAT_RDRF_MASK) {
+        char c = (char)(LPUART0->DATA & 0xFF);
+        UART_SendChar(LPUART0, c);
+    }
 }
 

@@ -160,3 +160,4 @@ void MRCC_Disable(uint8_t group, uint32_t mask) {
 
     SYSCON->CLKUNLOCK |= SYSCON_CLKUNLOCK_UNLOCK_MASK;
 }
+
